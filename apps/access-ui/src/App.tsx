@@ -1,13 +1,13 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./core/configuration/theme";
-import Default from "./presentation/screens/default";
+import { UserScreen } from "./presentation/screens/user";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Default />
+      <UserScreen />
     </ThemeProvider>
   );
 }

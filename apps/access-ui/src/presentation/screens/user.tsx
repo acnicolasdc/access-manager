@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
-import { UserManagerMemorized } from "../modules/userManager";
+import { UserManagerMemorized } from "@presentation/modules/userManager";
 
-function Default() {
+export function UserScreen() {
   return (
     <Container
       sx={{
@@ -17,5 +17,3 @@ function Default() {
     </Container>
   );
 }
-
-export default Default;

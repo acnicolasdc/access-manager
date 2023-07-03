@@ -1,5 +1,4 @@
-import Table from "../../../../components/table";
-
+import Table from "@presentation/components/table";
 import { COUNT_ADDITIONAL_COLUMNS, HEADER } from "./tableEdiList.constants";
 
 export function TableEdiList() {
