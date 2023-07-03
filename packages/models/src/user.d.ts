@@ -10,3 +10,8 @@ export type TUser = {
   homeAddress: string;
   password: string;
 };
+
+export type TAuthentication = {
+  username: string;
+  password: string;
+};

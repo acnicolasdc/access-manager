@@ -21,8 +21,8 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "src/*": ["./src/*"],
-      "presentation/*": ["./src/presentation/*"],
-      "core/*": ["./src/core/*"]
+      "@presentation/*": ["./src/presentation/*"],
+      "@core/*": ["./src/core/*"]
     }
   },
   "include": ["src"],

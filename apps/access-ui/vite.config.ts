@@ -15,6 +15,8 @@ export default defineConfig({
   resolve: {
     alias: {
       src: "/src",
+      "@core": "/src/core",
+      "@presentation": "/src/presentation",
     },
   },
 });

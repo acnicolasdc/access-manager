@@ -1,5 +1,5 @@
 import Container from "@mui/material/Container";
-import { UserManagerMemorized } from "src/presentation/modules/userManager";
+import { UserManagerMemorized } from "@presentation/modules/userManager";
 
 export function UserScreen() {
   return (

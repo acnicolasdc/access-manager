@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Table from "src/presentation/components/table";
+import Table from "@presentation/components/table";
 import {
   COUNT_ADDITIONAL_COLUMNS,
   HEADER,
@@ -9,9 +9,16 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Fade from "@mui/material/Fade";
+import { useSelectedUser } from "@presentation/modules/userManager/providers/providerSelectedUser";
+import {
+  useDialogActions,
+  EDialogActionsActionKind,
+} from "@presentation/modules/userManager/providers/providerDialogActions";
 
 export function TableUserList() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const { handleSelectUser } = useSelectedUser();
+  const { dispatch } = useDialogActions();
   const loading = false;
   const handleHoverSelect = (value: string) => {
     if (hovered === value) return;
@@ -108,7 +115,7 @@ export function TableUserList() {
                   </Table.Cell>
                   <Table.Cell>
                     <Typography variant="body1" component="p" noWrap>
-                    {item.homeAddress}
+                      {item.homeAddress}
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
@@ -122,7 +129,17 @@ export function TableUserList() {
                         <Button variant="text" disabled={false}>
                           Delete
                         </Button>
-                        <Button disabled={false} variant="contained">
+                        <Button
+                          disabled={false}
+                          variant="contained"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            handleSelectUser(item);
+                            dispatch({
+                              type: EDialogActionsActionKind.setOpenEditModal,
+                            });
+                          }}
+                        >
                           Edit
                         </Button>
                       </Stack>

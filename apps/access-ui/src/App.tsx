@@ -1,13 +1,15 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./core/configuration/theme";
-import { UserScreen } from "./presentation/screens/user";
-
+import Routes from "@presentation/screens";
+import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <UserScreen />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
