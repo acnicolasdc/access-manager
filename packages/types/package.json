@@ -1,0 +1,8 @@
+{
+    "name": "@access-manager/types",
+    "main": "src/index.ts",
+    "types": "src/index.ts",
+    "dependencies": {
+        "typescript": "^5.1.3"
+    }
+}
