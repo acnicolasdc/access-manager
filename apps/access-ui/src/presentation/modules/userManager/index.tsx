@@ -1,7 +1,7 @@
 import { memo } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import TableEdiList from "./containers/tableEdiList";
+import TableUserList from "./containers/tableUserList";
 
 function UserManager() {
   return (
@@ -9,7 +9,7 @@ function UserManager() {
       <Stack direction="row" gap={2} alignItems="center">
         <Typography variant="h2">User Manager</Typography>
       </Stack>
-      <TableEdiList />
+      <TableUserList />
     </Stack>
   );
 }

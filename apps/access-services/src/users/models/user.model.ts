@@ -8,7 +8,7 @@ import {
   AllowNull,
   Unique,
 } from 'sequelize-typescript';
-import { TUser } from '@access-manager/types';
+import type { TUser } from '@access-manager/types';
 
 @Table({ timestamps: true })
 export class User extends Model<TUser> {

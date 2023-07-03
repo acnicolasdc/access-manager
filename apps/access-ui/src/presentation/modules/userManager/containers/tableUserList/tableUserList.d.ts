@@ -1,4 +1,4 @@
-export type TTableEdiListHeader = {
+export type TTableUserListHeader = {
   title: string;
   index: number;
 };
