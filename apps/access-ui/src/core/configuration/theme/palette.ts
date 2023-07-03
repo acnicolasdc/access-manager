@@ -1,0 +1,101 @@
+import { alpha } from '@mui/material/styles';
+
+export const colors = {
+  accessibleYellow: '#BE5B05',
+  app: '#2AAAE2',
+  bayouBlue: '#039DDD',
+  bigSky: '#B1E1F5',
+  fadeBlue: '#e0f3fb',
+  bandit: '#E0F3FB',
+  blueridge: '#0062C0',
+  white: '#FFFFFF',
+  mediumBlue: '#0483B8',
+  darkBlue: '#134187',
+  darkRed: '#BA1B1F',
+  jackknife: '#CB2024',
+  whoaNelly: '#FFEDF1',
+  diesel: '#F1AE11',
+  gasoline: '#FEEFCB',
+  gatorguts: '#4CAF50',
+  frogger: '#2B731A',
+  lightBlue: '#a9d1f5',
+  mileMarker: '#E8F5E9',
+  nightTime: '#007DBC',
+  tandem: '#F4F5F5',
+  chrome: '#D4D6D9',
+  LFGrey: '#9EA2A9',
+  smokey: '#60646C',
+  burnout: '#46494F',
+  roadhog: '#303236',
+  axle: '#1D1E20',
+  grease: '#0A0A0B',
+};
+
+export default {
+  primary: {
+    main: colors.app,
+    dark: colors.nightTime,
+    light: colors.bandit,
+    contrastText: colors.white,
+  },
+  secondary: {
+    main: colors.blueridge,
+    dark: colors.darkBlue,
+    light: colors.lightBlue,
+    contrastText: colors.white,
+  },
+  action: {
+    active: alpha(colors.axle, 0.34),
+    hover: alpha(colors.axle, 0.04),
+    selected: alpha(colors.axle, 0.08),
+    disabled: alpha(colors.axle, 0.24),
+    disabledBackground: alpha(colors.axle, 0.1),
+    focus: alpha(colors.axle, 0.15),
+  },
+  error: {
+    main: colors.jackknife,
+    dark: colors.darkRed,
+    light: colors.whoaNelly,
+    contrastText: colors.white,
+  },
+  warning: {
+    main: colors.diesel,
+    dark: colors.accessibleYellow,
+    light: colors.gasoline,
+    contrastText: colors.white,
+  },
+  info: {
+    main: colors.bayouBlue,
+    dark: colors.mediumBlue,
+    light: colors.bigSky,
+    contrastText: colors.white,
+  },
+  success: {
+    main: colors.gatorguts,
+    dark: colors.frogger,
+    light: colors.mileMarker,
+    contrastText: colors.white,
+  },
+  text: {
+    primary: colors.axle,
+    secondary: alpha(colors.smokey, 0.9),
+    disabled: alpha(colors.chrome, 0.85),
+  },
+  neutral: {
+    main: colors.chrome,
+    dark: colors.LFGrey,
+    light: colors.tandem,
+    contrastText: colors.axle,
+  },
+  common: {
+    black: colors.axle,
+    white: colors.white,
+  },
+  background: {
+    default: colors.tandem,
+    darkPaper: colors.grease,
+  },
+  other: {
+    backdropOverlay: alpha(colors.axle, 0.5),
+  },
+};
