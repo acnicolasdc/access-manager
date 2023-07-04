@@ -1,8 +1,13 @@
+import { NoSessionRoute } from "@presentation/containers/noSessionRoute";
 import { AuthScreen } from "./auth.component";
 
 export const AuthScreenComponent = AuthScreen;
 export default {
-  path: "/auth",
+  path: "/",
   title: "Authentication",
-  element: () => <AuthScreen />,
+  element: (
+    <NoSessionRoute path="/">
+      <AuthScreen />
+    </NoSessionRoute>
+  ),
 };

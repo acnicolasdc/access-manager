@@ -1,8 +1,13 @@
+import { ProtectedRoute } from "@presentation/containers/protectedRoute";
 import { UserScreen } from "./user.component";
 
 export const UserScreenComponent = UserScreen;
 export default {
-  path: "/",
+  path: "/users",
   title: "User List",
-  element: () => <UserScreen />,
+  element: (
+    <ProtectedRoute>
+      <UserScreen />
+    </ProtectedRoute>
+  ),
 };

@@ -6,12 +6,26 @@ import { validationSchema } from "./signInForm.features";
 import { SignInFormInput } from "./signInFormInput.component";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import useSignIn from "@presentation/hooks/useCase/useSignIn";
 
-export function UserForm() {
+export interface UserFormProps {
+  onSuccess: (accessToken: string) => void;
+  onError: () => void;
+}
+
+export function UserForm({ onSuccess, onError }: UserFormProps) {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema()),
   });
-  const onSubmit = (data: TAuthentication) => console.log(data);
+  const { loading, signIn } = useSignIn();
+  const onSubmit = (data: TAuthentication) =>
+    signIn(data).then((response) => {
+      if (response.result?.access_token) {
+        return onSuccess(response.result.access_token);
+      }
+      return onError();
+    });
+
   return (
     <Box sx={{ width: "100%" }}>
       <Stack gap={2}>
@@ -19,7 +33,11 @@ export function UserForm() {
           <SignInFormInput name="username" control={control} label="Email" />
           <SignInFormInput name="password" control={control} label="Password" />
         </Stack>
-        <Button onClick={handleSubmit(onSubmit)} variant={"contained"}>
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          variant={"contained"}
+          disabled={loading}
+        >
           Sign In
         </Button>
       </Stack>

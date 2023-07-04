@@ -1,15 +1,17 @@
+import { RouterProvider } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./core/configuration/theme";
-import Routes from "@presentation/screens";
-import { BrowserRouter } from "react-router-dom";
+import router from "@presentation/screens";
+import { UserSessionProvider } from "@presentation/providers/providerUserSession";
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <UserSessionProvider>
+        <RouterProvider router={router} />
+      </UserSessionProvider>
     </ThemeProvider>
   );
 }

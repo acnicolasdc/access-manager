@@ -15,8 +15,10 @@ export default defineConfig({
   resolve: {
     alias: {
       src: "/src",
+      "@data": "/src/data",
       "@core": "/src/core",
       "@presentation": "/src/presentation",
+      "@domain": "/src/domain",
     },
   },
 });

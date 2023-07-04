@@ -21,23 +21,23 @@ export class RoleController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  getUsers(): Promise<RoleDTO[]> {
+  getRoles(): Promise<RoleDTO[]> {
     return this.roleService.findAll();
   }
 
   @Get(':id')
-  getUser(@Param('id') id: string): Promise<RoleDTO> {
+  getRole(@Param('id') id: string): Promise<RoleDTO> {
     return this.roleService.findOne(id);
   }
 
   @Post()
-  async createUser(@Body() role: CreateRoleDto): Promise<{ id: string }> {
+  async createRole(@Body() role: CreateRoleDto): Promise<{ id: string }> {
     const id = await this.roleService.create(role);
     return { id };
   }
 
   @Patch(':id')
-  updateUser(@Param('id') id: string, @Body() role: RoleDTO): Promise<void> {
+  updateRole(@Param('id') id: string, @Body() role: RoleDTO): Promise<void> {
     role.id = id;
     return this.roleService.update(role);
   }
