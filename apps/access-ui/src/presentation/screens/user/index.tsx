@@ -3,7 +3,7 @@ import { UserScreen } from "./user.component";
 
 export const UserScreenComponent = UserScreen;
 export default {
-  path: "/users",
+  path: "/manager",
   title: "User List",
   element: (
     <ProtectedRoute>
@@ -11,3 +11,4 @@ export default {
     </ProtectedRoute>
   ),
 };
+

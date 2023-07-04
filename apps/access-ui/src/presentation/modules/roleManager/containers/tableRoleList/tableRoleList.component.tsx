@@ -4,20 +4,20 @@ import {
   COUNT_ADDITIONAL_COLUMNS,
   HEADER,
   MOCK_DATA,
-} from "./tableUserList.constants";
+} from "./tableRoleList.constants";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Fade from "@mui/material/Fade";
-import { useSelectedUser } from "@presentation/modules/userManager/providers/providerSelectedUser";
+import { useSelectedRole } from "src/presentation/modules/roleManager/providers/providerSelectedRole";
 import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
 
-export function TableUserList() {
+export function TableRoleList() {
   const [hovered, setHovered] = useState<string | null>(null);
-  const { handleSelectUser } = useSelectedUser();
+  const { handleSelectRole } = useSelectedRole();
   const { dispatch } = useDialogActions();
   const loading = false;
   const handleHoverSelect = (value: string) => {
@@ -80,47 +80,22 @@ export function TableUserList() {
                 >
                   <Table.Cell>
                     <Typography variant="body1" component="p">
-                      {item.firstName}
+                      {item.name}
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
                     <Typography variant="body1" component="p">
-                      {item.middleName}
+                      {item.description}
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
                     <Typography variant="body1" component="p" noWrap>
-                      {item.lastName}
+                      {item.roleType.name}
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
                     <Typography variant="body1" component="p" noWrap>
-                      {item.email}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      {item.secondaryEmail}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      {item.phoneNumber}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      {item.secondaryPhoneNumber}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      {item.homeAddress}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      Role
+                      {item.roleType.description}
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
@@ -134,7 +109,7 @@ export function TableUserList() {
                           variant="contained"
                           onClick={(event) => {
                             event.stopPropagation();
-                            handleSelectUser(item);
+                            handleSelectRole(item);
                             dispatch({
                               type: EDialogActionsActionKind.setOpenEditModal,
                             });

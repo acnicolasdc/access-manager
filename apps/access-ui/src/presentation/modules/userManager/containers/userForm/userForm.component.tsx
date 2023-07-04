@@ -14,7 +14,7 @@ import { useSelectedUser } from "@presentation/modules/userManager/providers/pro
 import {
   useDialogActions,
   EDialogActionsActionKind,
-} from "@presentation/modules/userManager/providers/providerDialogActions";
+} from "@presentation/providers/providerDialogActions";
 import type { TUser } from "@access-manager/types";
 
 export function UserForm() {

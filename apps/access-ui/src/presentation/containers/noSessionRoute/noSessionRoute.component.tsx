@@ -15,7 +15,7 @@ export function NoSessionRoute({
   const navigate = useNavigate();
   useEffect(() => {
     if (session && path === location.pathname) {
-      navigate("/users");
+      navigate("/manager");
     }
   }, []);
   return children;

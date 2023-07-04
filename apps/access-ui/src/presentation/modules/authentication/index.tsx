@@ -10,7 +10,7 @@ function Authentication() {
     <UserForm
       onSuccess={(accessToken) => {
         login(accessToken);
-        setTimeout(() => navigate("/users"), 300);
+        setTimeout(() => navigate("/manager"), 300);
       }}
       onError={() => {
         console.log("toast");
