@@ -1,29 +1,29 @@
 import { getModelToken } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User as UserModel } from '../models/user.model';
-import { UserDao } from './user.dao';
+import { RoleType as RoleTypeModel } from '../models/roleType.model';
+import { RoleTypeDao } from './roleType.dao';
 import {
   functionsMock,
   recordMock,
   createMock,
   updateResultMock,
-} from '../mocks/user.mock';
+} from '../mocks/roleType.mock';
 
-describe('UserDao', () => {
-  let dao: UserDao;
+describe('RoleTypeDao', () => {
+  let dao: RoleTypeDao;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        UserDao,
+        RoleTypeDao,
         {
-          provide: getModelToken(UserModel),
+          provide: getModelToken(RoleTypeModel),
           useValue: functionsMock,
         },
       ],
     }).compile();
 
-    dao = module.get<UserDao>(UserDao);
+    dao = module.get<RoleTypeDao>(RoleTypeDao);
   });
 
   it('should return an array of frequencies', async () => {
@@ -32,7 +32,7 @@ describe('UserDao', () => {
     expect(await dao.findAll()).toBe(result);
   });
 
-  it('should return the user', async () => {
+  it('should return the roleType', async () => {
     jest.spyOn(functionsMock, 'findOne').mockImplementation(() => recordMock);
     expect(await dao.findOne(recordMock.id)).toBe(recordMock);
   });

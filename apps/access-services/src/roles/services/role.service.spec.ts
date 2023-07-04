@@ -1,33 +1,33 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
-import { UserDao } from '../dao/user.dao';
+import { RoleService } from './role.service';
+import { RoleDao } from '../dao/role.dao';
 import {
   functionsMock,
   recordMock,
   createMock,
   updateResultMock,
-} from '../mocks/user.mock';
+} from '../mocks/role.mock';
 
-describe('UsersService', () => {
-  let service: UsersService;
-  let dao: UserDao;
+describe('RoleService', () => {
+  let service: RoleService;
+  let dao: RoleDao;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService, { provide: UserDao, useValue: functionsMock }],
+      providers: [RoleService, { provide: RoleDao, useValue: functionsMock }],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
-    dao = module.get<UserDao>(UserDao);
+    service = module.get<RoleService>(RoleService);
+    dao = module.get<RoleDao>(RoleDao);
   });
 
-  it('should return all user', async () => {
+  it('should return all role', async () => {
     const result = [recordMock];
     jest.spyOn(dao, 'findAll').mockResolvedValue(result);
     expect(await service.findAll()).toBe(result);
   });
 
-  it('should return the user', async () => {
+  it('should return the role', async () => {
     jest.spyOn(dao, 'findOne').mockResolvedValue(recordMock);
     expect(await service.findOne(recordMock.id)).toBe(recordMock);
   });

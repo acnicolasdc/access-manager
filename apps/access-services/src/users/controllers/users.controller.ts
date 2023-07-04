@@ -15,11 +15,11 @@ import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
 @ApiTags('User')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   getUsers(): Promise<UserDTO[]> {
     return this.userService.findAll();

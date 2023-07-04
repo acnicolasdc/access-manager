@@ -5,6 +5,7 @@ import {
   IsString,
   ValidateIf,
   IsNotEmpty,
+  IsUUID,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -41,4 +42,8 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  roleId: string;
 }

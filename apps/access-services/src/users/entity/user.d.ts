@@ -9,4 +9,5 @@ export interface IUserEntity {
   secondaryPhoneNumber: string;
   homeAddress: string;
   password: string;
+  roleId: string;
 }

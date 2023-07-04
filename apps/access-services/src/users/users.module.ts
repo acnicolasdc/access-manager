@@ -11,4 +11,4 @@ import { UserDao } from './dao/user.dao';
   providers: [UsersService, UserDao],
   exports: [UsersService],
 })
-export class UsersModule {}
+export class UserModule {}

@@ -5,7 +5,9 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AppConfigModule } from './config/app/config.module';
 import { DatabaseMySqlConfigModule } from './config/database/mysql/config.module';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './users/users.module';
+import { RoleModule } from './roles/roles.module';
+import { RoleTypeModule } from './roleTypes/roleTypes.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -14,7 +16,9 @@ import { AuthModule } from './auth/auth.module';
       rootPath: join(__dirname, '../../', 'access-ui/dist'),
     }),
     DatabaseMySqlConfigModule,
-    UsersModule,
+    RoleTypeModule,
+    RoleModule,
+    UserModule,
     AppConfigModule,
     AuthModule,
   ],

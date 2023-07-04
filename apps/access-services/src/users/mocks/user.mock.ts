@@ -1,7 +1,7 @@
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UserDTO } from '../dtos/user.dto';
 
-const funtionsMock = {
+const functionsMock = {
   create: (): UserDTO => {
     return undefined;
   },
@@ -22,6 +22,7 @@ const createMock: CreateUserDto = {
   email: 'test@test.com',
   phoneNumber: '3163426999',
   password: '3163426999',
+  roleId: 'testId',
 };
 
 const recordMock: UserDTO = {
@@ -31,4 +32,4 @@ const recordMock: UserDTO = {
 
 const updateResultMock: [number, UserDTO[]] = [1, [recordMock]];
 
-export { recordMock, funtionsMock, createMock, updateResultMock };
+export { recordMock, functionsMock, createMock, updateResultMock };
