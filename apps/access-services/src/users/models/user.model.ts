@@ -7,11 +7,13 @@ import {
   Column,
   AllowNull,
   Unique,
+  BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
-import type { TUser } from '@access-manager/types';
-
+import type { IUserEntity } from '../entity/user';
+import { Role } from '../../roles/models/role.model';
 @Table({ timestamps: true })
-export class User extends Model<TUser> {
+export class User extends Model<IUserEntity> {
   @PrimaryKey
   @Default(UUIDV4)
   @Column
@@ -49,4 +51,12 @@ export class User extends Model<TUser> {
   @AllowNull(false)
   @Column
   password: string;
+
+  @AllowNull(false)
+  @ForeignKey(() => Role)
+  @Column
+  roleId: string;
+
+  @BelongsTo(() => Role, { foreignKey: 'roleId' })
+  role: Role;
 }
