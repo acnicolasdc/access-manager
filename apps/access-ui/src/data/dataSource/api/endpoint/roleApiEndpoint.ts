@@ -1,3 +1,4 @@
 export const roleApiEndpoint = {
-  getAll: "/role",
+  getAll: "/role/getAll",
+  update: "/role/updateRole",
 };

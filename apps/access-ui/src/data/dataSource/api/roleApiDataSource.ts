@@ -3,7 +3,11 @@ import type { TApplicationResponse } from "@core/types/http";
 import { httpClient } from "@core/http/axios";
 import { roleApiEndpoint } from "./endpoint/roleApiEndpoint";
 import IRoleDataSource from "../roleDataSource";
-import type { TRole, TGenericErrorResponse } from "@access-manager/types";
+import type {
+  TRole,
+  TGenericErrorResponse,
+  TGenericCreatedOrUpdateResponse,
+} from "@access-manager/types";
 
 export default class RoleApiDataSourceImpl implements IRoleDataSource {
   async getAll(): Promise<TApplicationResponse<TRole[]>> {
@@ -14,9 +18,26 @@ export default class RoleApiDataSourceImpl implements IRoleDataSource {
     const statusCode = get(response, "data.statusCode", 0);
     const error = get(response, "data.error", "");
     const message = get(response, "data.message", []);
-    console.log(result)
+    console.log(result);
     return {
       result,
+      statusCode,
+      error,
+      message,
+    };
+  }
+  async update(
+    params: Omit<TRole, "createdAt" | "updatedAt">
+  ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
+    const response = await httpClient.patch<
+      TGenericCreatedOrUpdateResponse | TGenericErrorResponse
+    >(`${roleApiEndpoint.update}/${params.id}`, params);
+    const id = get(response, "data.id", null);
+    const statusCode = get(response, "data.statusCode", 0);
+    const error = get(response, "data.error", "");
+    const message = get(response, "data.message", []);
+    return {
+      result: id ? { id } : id,
       statusCode,
       error,
       message,

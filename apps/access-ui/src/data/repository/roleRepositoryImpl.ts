@@ -1,6 +1,6 @@
 import type { TApplicationResponse } from "@core/types/http";
 import type { IRoleRepository } from "@domain/repository/roleRepository";
-import type { TRole } from "@access-manager/types";
+import type { TGenericCreatedOrUpdateResponse, TRole } from "@access-manager/types";
 import IRoleDataSource from "@data/dataSource/roleDataSource";
 
 export class RoleRepositoryImpl implements IRoleRepository {
@@ -11,5 +11,11 @@ export class RoleRepositoryImpl implements IRoleRepository {
   }
   async getAll(): Promise<TApplicationResponse<TRole[]>> {
     return this.dataSource.getAll();
+  }
+
+  async update(
+    params: Omit<TRole, "createdAt" | "updatedAt">
+  ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
+    return this.dataSource.update(params);
   }
 }

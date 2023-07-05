@@ -20,7 +20,7 @@ export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get()
+  @Get('getAll')
   getRoles(): Promise<RoleDTO[]> {
     return this.roleService.findAll();
   }
@@ -36,7 +36,7 @@ export class RoleController {
     return { id };
   }
 
-  @Patch(':id')
+  @Patch('updateRole/:id')
   updateRole(@Param('id') id: string, @Body() role: RoleDTO): Promise<void> {
     role.id = id;
     return this.roleService.update(role);

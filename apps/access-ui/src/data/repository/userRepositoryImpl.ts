@@ -12,7 +12,7 @@ export class UserRepositoryImpl implements IUserRepository {
   constructor(_dataSource: IUserDataSource) {
     this.dataSource = _dataSource;
   }
-  update(
+  async update(
     params: Omit<TUser, "createdAt" | "updatedAt">
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
     return this.dataSource.update(params);

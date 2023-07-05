@@ -20,6 +20,7 @@ import { UserFormSelect } from "./userFormSelect.component";
 import useUpdateUser from "@presentation/hooks/useCase/useUpdateUser";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import LoadingButton from "src/presentation/components/loadingButton";
 
 export function UserForm() {
   const { loading, updateUser } = useUpdateUser();
@@ -130,13 +131,15 @@ export function UserForm() {
           <Button onClick={handleCloseModal} variant="text" disabled={loading}>
             Cancel
           </Button>
-          <Button
+          <LoadingButton
             onClick={handleSubmit(onSubmit)}
             variant="contained"
-            disabled={!(isDirty && isValid) || loading}
+            disabled={!(isDirty && isValid)}
+            loading={loading}
+            loadingIndicator="Updating"
           >
             Update
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>

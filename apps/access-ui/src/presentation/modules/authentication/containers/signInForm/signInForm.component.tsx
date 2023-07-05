@@ -5,8 +5,8 @@ import type { TAuthentication } from "@access-manager/types";
 import { validationSchema } from "./signInForm.features";
 import { SignInFormInput } from "./signInFormInput.component";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import useSignIn from "@presentation/hooks/useCase/useSignIn";
+import LoadingButton from "@presentation/components/loadingButton";
 
 export interface UserFormProps {
   onSuccess: (accessToken: string) => void;
@@ -31,15 +31,21 @@ export function UserForm({ onSuccess, onError }: UserFormProps) {
       <Stack gap={2}>
         <Stack gap={1}>
           <SignInFormInput name="username" control={control} label="Email" />
-          <SignInFormInput name="password" control={control} label="Password" type="password" />
+          <SignInFormInput
+            name="password"
+            control={control}
+            label="Password"
+            type="password"
+          />
         </Stack>
-        <Button
+        <LoadingButton
+          variant="contained"
           onClick={handleSubmit(onSubmit)}
-          variant={"contained"}
-          disabled={loading}
+          loading={loading}
+          loadingIndicator="Requesting"
         >
           Sign In
-        </Button>
+        </LoadingButton>
       </Stack>
     </Box>
   );
