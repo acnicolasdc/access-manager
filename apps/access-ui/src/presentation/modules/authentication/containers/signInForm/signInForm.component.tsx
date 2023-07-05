@@ -13,7 +13,7 @@ export interface UserFormProps {
   onError: () => void;
 }
 
-export function UserForm({ onSuccess, onError }: UserFormProps) {
+export function UpdateUserForm({ onSuccess, onError }: UserFormProps) {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema()),
   });

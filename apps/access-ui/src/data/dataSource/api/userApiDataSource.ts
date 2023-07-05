@@ -42,4 +42,21 @@ export default class UserApiDataSourceImpl implements IUserDataSource {
       message,
     };
   }
+  async create(params: Omit<TUser, "createdAt" | "updatedAt" | 'id'>): Promise<
+    TApplicationResponse<TGenericCreatedOrUpdateResponse | null>
+  > {
+    const response = await httpClient.post<
+      TGenericCreatedOrUpdateResponse | TGenericErrorResponse
+    >(userApiEndpoint.create, params);
+    const idCreated = get(response, "data.id", null);
+    const statusCode = get(response, "data.statusCode", 0);
+    const error = get(response, "data.error", "");
+    const message = get(response, "data.message", []);
+    return {
+      result: idCreated ? { id: idCreated } : idCreated,
+      statusCode,
+      error,
+      message,
+    };
+  }
 }

@@ -17,6 +17,14 @@ export class UserRepositoryImpl implements IUserRepository {
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
     return this.dataSource.update(params);
   }
+  async create({
+    id,
+    ...params
+  }: Omit<TUser, "createdAt" | "updatedAt">): Promise<
+    TApplicationResponse<TGenericCreatedOrUpdateResponse | null>
+  > {
+    return this.dataSource.create({ ...params });
+  }
   async getAll(): Promise<TApplicationResponse<TUser[]>> {
     return this.dataSource.getAll();
   }

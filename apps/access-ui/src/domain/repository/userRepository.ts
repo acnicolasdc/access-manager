@@ -9,4 +9,7 @@ export interface IUserRepository {
   update(
     params: Omit<TUser, "createdAt" | "updatedAt">
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
+  create(
+    params: Omit<TUser, "createdAt" | "updatedAt">
+  ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }

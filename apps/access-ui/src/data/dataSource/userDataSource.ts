@@ -9,4 +9,7 @@ export default interface IUserDataSource {
   update(
     params: Omit<TUser, "createdAt" | "updatedAt">
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
+  create(
+    params: Omit<TUser, "createdAt" | "updatedAt" | 'id'>
+  ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }

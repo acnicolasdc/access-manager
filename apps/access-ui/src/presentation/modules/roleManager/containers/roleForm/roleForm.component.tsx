@@ -68,9 +68,6 @@ export function RoleForm() {
     <>
       <Dialog
         open={state.editModal}
-        onClose={() => {
-          console.log("dock");
-        }}
         PaperComponent={Paper}
         fullWidth
       >

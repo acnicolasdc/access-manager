@@ -27,7 +27,7 @@ export function UserScreen() {
       }}
       maxWidth={false}
     >
-      <Stack direction="column" gap={2}>
+      <Stack direction="column" gap={0}>
         <Stack direction="row" gap={2} alignItems="center">
           <Typography variant="h2" >Manager Docking Bay</Typography>
           <Tabs value={value} onChange={handleChange} aria-label="edi">

@@ -1,1 +1,1 @@
-export { UserForm } from './signInForm.component';
+export { UpdateUserForm } from './signInForm.component';

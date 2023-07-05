@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Control, Controller } from "react-hook-form";
 import type { TUser } from "@access-manager/types";
-import type { TKeyOfTUser } from "./userForm";
+import type { TKeyOfTUser } from "../core/updateUserForm";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import theme from "@core/configuration/theme";
