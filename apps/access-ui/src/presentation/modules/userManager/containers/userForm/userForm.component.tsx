@@ -21,9 +21,11 @@ import useUpdateUser from "@presentation/hooks/useCase/useUpdateUser";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import LoadingButton from "src/presentation/components/loadingButton";
+import { useUserList } from "@presentation/modules/userManager/providers/providerUserList";
 
 export function UserForm() {
   const { loading, updateUser } = useUpdateUser();
+  const { getAllUsers, loading: requesting } = useUserList();
   const { user, handleUnSelectUser } = useSelectedUser();
   const { state, dispatch } = useDialogActions();
   const [open, setOpen] = useState(false);
@@ -59,8 +61,10 @@ export function UserForm() {
 
   const onSubmit = (data: Omit<TUser, "createdAt" | "updatedAt">) =>
     updateUser(data).then(() => {
-      handleCloseModal();
-      setTimeout(() => setOpen(true), 300);
+      getAllUsers().then(() => {
+        handleCloseModal();
+        setTimeout(() => setOpen(true), 300);
+      });
     });
   return (
     <>
@@ -135,7 +139,7 @@ export function UserForm() {
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disabled={!(isDirty && isValid)}
-            loading={loading}
+            loading={loading || requesting}
             loadingIndicator="Updating"
           >
             Update

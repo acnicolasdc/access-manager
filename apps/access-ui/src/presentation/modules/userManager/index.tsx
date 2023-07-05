@@ -3,13 +3,16 @@ import TableUserList from "./containers/tableUserList";
 import { UserForm } from "./containers/userForm";
 import { SelectedUserProvider } from "./providers/providerSelectedUser";
 import { DialogActionsProvider } from "@presentation/providers/providerDialogActions";
+import { UserListProvider } from "./providers/providerUserList";
 
 function UserManager() {
   return (
     <SelectedUserProvider>
       <DialogActionsProvider>
-        <TableUserList />
-        <UserForm />
+        <UserListProvider>
+          <TableUserList />
+          <UserForm />
+        </UserListProvider>
       </DialogActionsProvider>
     </SelectedUserProvider>
   );

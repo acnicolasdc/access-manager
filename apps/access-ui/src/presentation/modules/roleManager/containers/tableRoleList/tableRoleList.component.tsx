@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Table from "@presentation/components/table";
 import { COUNT_ADDITIONAL_COLUMNS, HEADER } from "./tableRoleList.constants";
 import Typography from "@mui/material/Typography";
@@ -6,21 +6,18 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Fade from "@mui/material/Fade";
 import { useSelectedRole } from "@presentation/modules/roleManager/providers/providerSelectedRole";
+import { useRoleList } from "@presentation/modules/roleManager/providers/providerRoleList";
 import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
-import useGetAllRoles from "@presentation/hooks/useCase/useGetAllRoles";
 import EllipseBox from "@presentation/components/ellipseBox";
 
 export function TableRoleList() {
-  const { loading, getAllRoles, roles } = useGetAllRoles();
+  const { loading, roles } = useRoleList();
   const [hovered, setHovered] = useState<string | null>(null);
   const { handleSelectRole } = useSelectedRole();
   const { dispatch } = useDialogActions();
-  useEffect(() => {
-    getAllRoles();
-  }, []);
   const handleHoverSelect = (value: string) => {
     if (hovered === value) return;
     setHovered(value);

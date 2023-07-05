@@ -10,17 +10,14 @@ import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
-import useGetAllUsers from "@presentation/hooks/useCase/useGetAllUsers";
 import EllipseBox from "src/presentation/components/ellipseBox";
+import { useUserList } from "@presentation/modules/userManager/providers/providerUserList";
 
 export function TableUserList() {
-  const { loading, getAllUsers, users } = useGetAllUsers();
+  const { loading, users } = useUserList();
   const [hovered, setHovered] = useState<string | null>(null);
   const { handleSelectUser } = useSelectedUser();
   const { dispatch } = useDialogActions();
-  useEffect(() => {
-    getAllUsers();
-  }, []);
   const handleHoverSelect = (value: string) => {
     if (hovered === value) return;
     setHovered(value);
@@ -29,7 +26,6 @@ export function TableUserList() {
     if (!hovered) return;
     setHovered(null);
   };
-  console.log(users, "users");
   return (
     <Table>
       <Table.Head>

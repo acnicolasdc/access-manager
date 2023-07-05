@@ -21,8 +21,10 @@ import LoadingButton from "@presentation/components/loadingButton";
 import useUpdateRole from "@presentation/hooks/useCase/useUpdateRole";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { useRoleList } from "@presentation/modules/roleManager/providers/providerRoleList";
 
 export function RoleForm() {
+  const { loading: requesting, getAllRoles } = useRoleList();
   const { loading, updateRole } = useUpdateRole();
   const [open, setOpen] = useState(false);
   const { role, handleUnSelectRole } = useSelectedRole();
@@ -56,8 +58,10 @@ export function RoleForm() {
 
   const onSubmit = (data: Omit<TRole, "createdAt" | "updatedAt">) =>
     updateRole(data).then(() => {
-      handleCloseModal();
-      setTimeout(() => setOpen(true), 300);
+      getAllRoles().then(() => {
+        handleCloseModal();
+        setTimeout(() => setOpen(true), 300);
+      });
     });
 
   return (
@@ -98,7 +102,7 @@ export function RoleForm() {
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disabled={!(isDirty && isValid)}
-            loading={loading}
+            loading={loading || requesting}
             loadingIndicator="Requesting"
           >
             Update
