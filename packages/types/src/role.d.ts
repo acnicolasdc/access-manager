@@ -7,7 +7,7 @@ export type TRoleType = {
 export type TRole = {
   createdAt: string;
   description: string;
-  id: string;
+  id: string | null;
   name: string;
   roleTypeId: string;
   updatedAt: string;

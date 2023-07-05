@@ -13,7 +13,6 @@ import {
 import EllipseBox from "src/presentation/components/ellipseBox";
 import { useUserList } from "@presentation/modules/userManager/providers/providerUserList";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 
 interface TableUserListProps {
   header?: JSX.Element;
@@ -73,7 +72,7 @@ export function TableUserList({ header }: TableUserListProps) {
                     disabled={false}
                     key={item.id}
                     selected={false}
-                    onMouseEnter={() => handleHoverSelect(item.id)}
+                    onMouseEnter={() => handleHoverSelect(item.id || '')}
                     onMouseLeave={() => handleHoverUnSelect()}
                     checkboxProps={{
                       checked: false,

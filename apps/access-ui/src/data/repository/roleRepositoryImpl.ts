@@ -12,7 +12,14 @@ export class RoleRepositoryImpl implements IRoleRepository {
   async getAll(): Promise<TApplicationResponse<TRole[]>> {
     return this.dataSource.getAll();
   }
-
+  async create({
+    id,
+    ...params
+  }: Omit<TRole, "createdAt" | "updatedAt">): Promise<
+    TApplicationResponse<TGenericCreatedOrUpdateResponse | null>
+  > {
+    return this.dataSource.create({ ...params });
+  }
   async update(
     params: Omit<TRole, "createdAt" | "updatedAt">
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {

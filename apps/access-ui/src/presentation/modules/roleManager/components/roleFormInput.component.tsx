@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Control, Controller } from "react-hook-form";
 import TextField from "@presentation/components/textFiled";
 import type { TRole } from "@access-manager/types";
-import type { TKeyOfTRole } from "./roleForm";
+import type { TKeyOfTRole } from "../core/roleForm";
 
 export interface IRoleFormInputProps {
   name: TKeyOfTRole;

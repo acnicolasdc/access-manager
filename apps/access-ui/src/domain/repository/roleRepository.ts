@@ -6,4 +6,7 @@ export interface IRoleRepository {
   update(
     params: Omit<TRole, "createdAt" | "updatedAt">
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
+  create(
+    params: Omit<TRole, "createdAt" | "updatedAt">
+  ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }

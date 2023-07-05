@@ -12,8 +12,13 @@ import {
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
 import EllipseBox from "@presentation/components/ellipseBox";
+import Box from "@mui/material/Box";
 
-export function TableRoleList() {
+interface TableUserListProps {
+  header?: JSX.Element;
+}
+
+export function TableRoleList({ header }: TableUserListProps) {
   const { loading, roles } = useRoleList();
   const [hovered, setHovered] = useState<string | null>(null);
   const { handleSelectRole } = useSelectedRole();
@@ -27,99 +32,111 @@ export function TableRoleList() {
     setHovered(null);
   };
   return (
-    <Table>
-      <Table.Head>
-        <Table.RowHead
-          editable={false}
-          disabled={false}
-          numSelected={0}
-          rowCount={0}
-        >
-          {HEADER.map(({ title, index }) => (
-            <Table.Cell key={index}>{title}</Table.Cell>
-          ))}
-        </Table.RowHead>
-      </Table.Head>
-      {loading ? (
-        <Table.Skeleton
-          rows={5}
-          columns={HEADER.length + COUNT_ADDITIONAL_COLUMNS}
-        />
-      ) : (
-        <Table.IfIsEmpty
-          isEmpty={false}
-          colSpan={HEADER.length + COUNT_ADDITIONAL_COLUMNS}
-          message="No Data Found"
-        >
-          <Table.Body>
-            {roles.map((item) => {
-              const isHovered = hovered === item.id;
-              return (
-                <Table.RowBody
-                  editable={false}
-                  disabled={false}
-                  key={item.id}
-                  selected={false}
-                  onMouseEnter={() => handleHoverSelect(item.id)}
-                  onMouseLeave={() => handleHoverUnSelect()}
-                  checkboxProps={{
-                    checked: false,
-                    inputProps: {
-                      "aria-labelledby": `enhanced-table-checkbox-${item.id}`,
-                    },
-                  }}
-                  hover={true}
-                >
-                  <Table.Cell>
-                    <Typography variant="body1" component="p">
-                      {item.name}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p">
-                      {item.description}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <EllipseBox maxWidth={160} tooltipLabel={item.roleTypeId}>
+    <>
+      <Box
+        sx={{ width: "100%", display: "flex", justifyContent: "end" }}
+        py={2}
+      >
+        {header}
+      </Box>
+      <Table>
+        <Table.Head>
+          <Table.RowHead
+            editable={false}
+            disabled={false}
+            numSelected={0}
+            rowCount={0}
+          >
+            {HEADER.map(({ title, index }) => (
+              <Table.Cell key={index}>{title}</Table.Cell>
+            ))}
+          </Table.RowHead>
+        </Table.Head>
+        {loading ? (
+          <Table.Skeleton
+            rows={5}
+            columns={HEADER.length + COUNT_ADDITIONAL_COLUMNS}
+          />
+        ) : (
+          <Table.IfIsEmpty
+            isEmpty={false}
+            colSpan={HEADER.length + COUNT_ADDITIONAL_COLUMNS}
+            message="No Data Found"
+          >
+            <Table.Body>
+              {roles.map((item) => {
+                const isHovered = hovered === item.id;
+                return (
+                  <Table.RowBody
+                    editable={false}
+                    disabled={false}
+                    key={item.id}
+                    selected={false}
+                    onMouseEnter={() => handleHoverSelect(item.id)}
+                    onMouseLeave={() => handleHoverUnSelect()}
+                    checkboxProps={{
+                      checked: false,
+                      inputProps: {
+                        "aria-labelledby": `enhanced-table-checkbox-${item.id}`,
+                      },
+                    }}
+                    hover={true}
+                  >
+                    <Table.Cell>
+                      <Typography variant="body1" component="p">
+                        {item.name}
+                      </Typography>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Typography variant="body1" component="p">
+                        {item.description}
+                      </Typography>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <EllipseBox maxWidth={160} tooltipLabel={item.roleTypeId}>
+                        <Typography variant="body1" component="p" noWrap>
+                          {item.roleTypeId}
+                        </Typography>
+                      </EllipseBox>
+                    </Table.Cell>
+                    <Table.Cell>
                       <Typography variant="body1" component="p" noWrap>
                         {item.roleTypeId}
                       </Typography>
-                    </EllipseBox>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      {item.roleTypeId}
-                    </Typography>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Fade in={isHovered}>
-                      <Stack direction="row" alignItems="flex-end" spacing={1}>
-                        <Button variant="text" disabled={false}>
-                          Delete
-                        </Button>
-                        <Button
-                          disabled={false}
-                          variant="contained"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleSelectRole(item);
-                            dispatch({
-                              type: EDialogActionsActionKind.setOpenEditModal,
-                            });
-                          }}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Fade in={isHovered}>
+                        <Stack
+                          direction="row"
+                          alignItems="flex-end"
+                          spacing={1}
                         >
-                          Edit
-                        </Button>
-                      </Stack>
-                    </Fade>
-                  </Table.Cell>
-                </Table.RowBody>
-              );
-            })}
-          </Table.Body>
-        </Table.IfIsEmpty>
-      )}
-    </Table>
+                          <Button variant="text" disabled={false}>
+                            Delete
+                          </Button>
+                          <Button
+                            disabled={false}
+                            variant="contained"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleSelectRole(item);
+                              dispatch({
+                                type: EDialogActionsActionKind.setOpenEditModal,
+                              });
+                            }}
+                          >
+                            Edit
+                          </Button>
+                        </Stack>
+                      </Fade>
+                    </Table.Cell>
+                  </Table.RowBody>
+                );
+              })}
+            </Table.Body>
+          </Table.IfIsEmpty>
+        )}
+      </Table>
+    </>
   );
 }

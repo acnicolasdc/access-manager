@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { validationSchema } from "./roleForm.features";
-import { RoleFormInput } from "./roleFormInput.component";
+import { validationSchema } from "./createRoleForm.features";
+import { RoleFormInput } from "../../components/roleFormInput.component";
 import Stack from "@mui/material/Stack";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,67 +10,48 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
-import { useSelectedRole } from "@presentation/modules/roleManager/providers/providerSelectedRole";
-import {
-  useDialogActions,
-  EDialogActionsActionKind,
-} from "@presentation/providers/providerDialogActions";
 import type { TRole } from "@access-manager/types";
-import { RoleFormSelect } from "./roleFormSelect.component";
+import { RoleFormSelect } from "../../components/roleFormSelect.component";
 import LoadingButton from "@presentation/components/loadingButton";
-import useUpdateRole from "@presentation/hooks/useCase/useUpdateRole";
+import useCreateRole from "@presentation/hooks/useCase/useCreateRole";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRoleList } from "@presentation/modules/roleManager/providers/providerRoleList";
 
-export function RoleForm() {
+export interface ICreateRoleFormProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export function CreateRoleForm({ open, onClose }: ICreateRoleFormProps) {
   const { loading: requesting, getAllRoles } = useRoleList();
-  const { loading, updateRole } = useUpdateRole();
-  const [open, setOpen] = useState(false);
-  const { role, handleUnSelectRole } = useSelectedRole();
-  const { state, dispatch } = useDialogActions();
+  const { loading, createRole } = useCreateRole();
+  const [display, setDisplay] = useState(false);
   const {
     control,
-    reset,
     handleSubmit,
     formState: { isValid, isDirty },
   } = useForm({
     resolver: yupResolver(validationSchema()),
-    defaultValues: useMemo(() => {
-      if (role) return role;
-    }, [role]),
   });
-  const handleCloseModal = () => {
-    dispatch({ type: EDialogActionsActionKind.setOpenEditModal });
-    setTimeout(() => handleUnSelectRole(), 300);
-  };
 
   const handleClose = (_?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setDisplay(false);
   };
 
-  useEffect(() => {
-    if (role) reset(role);
-  }, [role]);
-
   const onSubmit = (data: Omit<TRole, "createdAt" | "updatedAt">) =>
-    updateRole(data).then(() => {
+    createRole(data).then(() => {
       getAllRoles().then(() => {
-        handleCloseModal();
-        setTimeout(() => setOpen(true), 300);
+        onClose();
+        setTimeout(() => setDisplay(true), 300);
       });
     });
-
   return (
     <>
-      <Dialog
-        open={state.editModal}
-        PaperComponent={Paper}
-        fullWidth
-      >
+      <Dialog open={open} PaperComponent={Paper} fullWidth>
         <DialogTitle component="h5" variant="h5">
           Role form
         </DialogTitle>
@@ -92,7 +73,7 @@ export function RoleForm() {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseModal} variant="text">
+          <Button onClick={onClose} variant="text">
             Cancel
           </Button>
           <LoadingButton
@@ -102,12 +83,12 @@ export function RoleForm() {
             loading={loading || requesting}
             loadingIndicator="Requesting"
           >
-            Update
+            Create
           </LoadingButton>
         </DialogActions>
       </Dialog>
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert severity="success">Role updated successfully</Alert>
+      <Snackbar open={display} autoHideDuration={2000} onClose={handleClose}>
+        <Alert severity="success">Role created successfully</Alert>
       </Snackbar>
     </>
   );

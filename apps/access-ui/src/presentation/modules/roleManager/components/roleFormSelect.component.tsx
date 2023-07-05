@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Control, Controller } from "react-hook-form";
 import type { TRole } from "@access-manager/types";
-import type { TKeyOfTRole } from "./roleForm";
+import type { TKeyOfTRole } from "../core/roleForm";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import theme from "@core/configuration/theme";

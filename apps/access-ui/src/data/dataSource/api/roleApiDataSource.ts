@@ -18,9 +18,26 @@ export default class RoleApiDataSourceImpl implements IRoleDataSource {
     const statusCode = get(response, "data.statusCode", 0);
     const error = get(response, "data.error", "");
     const message = get(response, "data.message", []);
-    console.log(result);
+
     return {
       result,
+      statusCode,
+      error,
+      message,
+    };
+  }
+  async create(
+    params: Omit<TRole, "createdAt" | "updatedAt" | "id">
+  ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
+    const response = await httpClient.post<
+      TGenericCreatedOrUpdateResponse | TGenericErrorResponse
+    >(roleApiEndpoint.create, params);
+    const idCreated = get(response, "data.id", null);
+    const statusCode = get(response, "data.statusCode", 0);
+    const error = get(response, "data.error", "");
+    const message = get(response, "data.message", []);
+    return {
+      result: idCreated ? { id: idCreated } : idCreated,
       statusCode,
       error,
       message,
