@@ -16,11 +16,17 @@ import {
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
 import type { TRole } from "@access-manager/types";
+import { RoleFormSelect } from "./roleFormSelect.component";
 
 export function RoleForm() {
   const { role, handleUnSelectRole } = useSelectedRole();
   const { state, dispatch } = useDialogActions();
-  const { control, reset, handleSubmit } = useForm({
+  const {
+    control,
+    reset,
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = useForm({
     resolver: yupResolver(validationSchema()),
     defaultValues: useMemo(() => {
       if (role) return role;
@@ -31,7 +37,8 @@ export function RoleForm() {
     if (role) reset(role);
   }, [role]);
 
-  const onSubmit = (data: Omit<TRole, "roleType">) => console.log(data);
+  const onSubmit = (data: Omit<TRole, "createdAt" | "updatedAt">) =>
+    console.log(data);
 
   return (
     <Dialog
@@ -55,7 +62,7 @@ export function RoleForm() {
               label="Role Description"
             />
           </Stack>
-          <RoleFormInput
+          <RoleFormSelect
             name="roleTypeId"
             control={control}
             label="Role Type"
@@ -72,7 +79,11 @@ export function RoleForm() {
         >
           Cancel
         </Button>
-        <Button onClick={handleSubmit(onSubmit)} variant="contained">
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          variant="contained"
+          disabled={!(isDirty && isValid)}
+        >
           Update
         </Button>
       </DialogActions>

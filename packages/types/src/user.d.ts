@@ -9,4 +9,7 @@ export type TUser = {
   secondaryPhoneNumber: string;
   homeAddress: string;
   password: string;
+  createdAt: string;
+  updatedAt: string;
+  roleId: string;
 };

@@ -1,25 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "@presentation/components/table";
-import {
-  COUNT_ADDITIONAL_COLUMNS,
-  HEADER,
-  MOCK_DATA,
-} from "./tableRoleList.constants";
+import { COUNT_ADDITIONAL_COLUMNS, HEADER } from "./tableRoleList.constants";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Fade from "@mui/material/Fade";
-import { useSelectedRole } from "src/presentation/modules/roleManager/providers/providerSelectedRole";
+import { useSelectedRole } from "@presentation/modules/roleManager/providers/providerSelectedRole";
 import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
+import useGetAllRoles from "@presentation/hooks/useCase/useGetAllRoles";
+import EllipseBox from "@presentation/components/ellipseBox";
 
 export function TableRoleList() {
+  const { loading, getAllRoles, roles } = useGetAllRoles();
   const [hovered, setHovered] = useState<string | null>(null);
   const { handleSelectRole } = useSelectedRole();
   const { dispatch } = useDialogActions();
-  const loading = false;
+  useEffect(() => {
+    getAllRoles();
+  }, []);
   const handleHoverSelect = (value: string) => {
     if (hovered === value) return;
     setHovered(value);
@@ -36,9 +37,6 @@ export function TableRoleList() {
           disabled={false}
           numSelected={0}
           rowCount={0}
-          onSelectAllClick={() => {
-            console.log("login");
-          }}
         >
           {HEADER.map(({ title, index }) => (
             <Table.Cell key={index}>{title}</Table.Cell>
@@ -57,7 +55,7 @@ export function TableRoleList() {
           message="No Data Found"
         >
           <Table.Body>
-            {MOCK_DATA.map((item) => {
+            {roles.map((item) => {
               const isHovered = hovered === item.id;
               return (
                 <Table.RowBody
@@ -65,9 +63,6 @@ export function TableRoleList() {
                   disabled={false}
                   key={item.id}
                   selected={false}
-                  onClick={() => {
-                    console.log("Hello");
-                  }}
                   onMouseEnter={() => handleHoverSelect(item.id)}
                   onMouseLeave={() => handleHoverUnSelect()}
                   checkboxProps={{
@@ -89,13 +84,15 @@ export function TableRoleList() {
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      {item.roleType.name}
-                    </Typography>
+                    <EllipseBox maxWidth={160} tooltipLabel={item.roleTypeId}>
+                      <Typography variant="body1" component="p" noWrap>
+                        {item.roleTypeId}
+                      </Typography>
+                    </EllipseBox>
                   </Table.Cell>
                   <Table.Cell>
                     <Typography variant="body1" component="p" noWrap>
-                      {item.roleType.description}
+                      {item.roleTypeId}
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>

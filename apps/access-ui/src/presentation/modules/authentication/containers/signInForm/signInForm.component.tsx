@@ -31,7 +31,7 @@ export function UserForm({ onSuccess, onError }: UserFormProps) {
       <Stack gap={2}>
         <Stack gap={1}>
           <SignInFormInput name="username" control={control} label="Email" />
-          <SignInFormInput name="password" control={control} label="Password" />
+          <SignInFormInput name="password" control={control} label="Password" type="password" />
         </Stack>
         <Button
           onClick={handleSubmit(onSubmit)}

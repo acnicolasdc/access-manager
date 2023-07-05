@@ -14,4 +14,5 @@ export const validationSchema = () =>
     phoneNumber: Yup.string().min(10).required("phoneNumber is required"),
     password: Yup.string().min(6).required("password is required"),
     secondaryEmail: Yup.string().email().required("secondaryEmail is required"),
+    roleId: Yup.string().required("roleId is required"),
   });

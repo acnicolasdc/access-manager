@@ -1,4 +1,4 @@
-export type TGenericCreatedResponse = {
+export type TGenericCreatedOrUpdateResponse = {
   id: string;
 };
 

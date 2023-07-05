@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { Control, Controller } from "react-hook-form";
 import TextField from "@presentation/components/textFiled";
 import type { TAuthentication } from "@access-manager/types";
@@ -9,12 +9,14 @@ export interface ISignInFormInputProps {
   control: Control<TAuthentication> | undefined;
   label: string;
   setValue?: Dispatch<SetStateAction<string | null>>;
+  type?: HTMLInputTypeAttribute;
 }
 
 export function SignInFormInput({
   name,
   control,
   label,
+  type
 }: ISignInFormInputProps) {
   return (
     <Controller
@@ -30,6 +32,7 @@ export function SignInFormInput({
           fullWidth
           label={label}
           variant="filled"
+          type={type}
         />
       )}
     />

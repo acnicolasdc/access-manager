@@ -6,7 +6,7 @@ import type { TKeyOfTRole } from "./roleForm";
 
 export interface IRoleFormInputProps {
   name: TKeyOfTRole;
-  control: Control<Omit<TRole, "roleType">> | undefined;
+  control: Control<Omit<TRole, "createdAt" | "updatedAt">> | undefined;
   label: string;
   setValue?: Dispatch<SetStateAction<string | null>>;
 }

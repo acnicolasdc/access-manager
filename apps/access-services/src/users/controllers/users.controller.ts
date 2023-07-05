@@ -20,7 +20,7 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get()
+  @Get('getAllUsers')
   getUsers(): Promise<UserDTO[]> {
     return this.userService.findAll();
   }
@@ -30,13 +30,13 @@ export class UsersController {
     return this.userService.findOne(id);
   }
 
-  @Post()
+  @Post('createUser')
   async createUser(@Body() user: CreateUserDto): Promise<{ id: string }> {
     const id = await this.userService.create(user);
     return { id };
   }
 
-  @Patch(':id')
+  @Patch('updateUser/:id')
   updateUser(@Param('id') id: string, @Body() user: UserDTO): Promise<void> {
     user.id = id;
     return this.userService.update(user);

@@ -1,10 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "@presentation/components/table";
-import {
-  COUNT_ADDITIONAL_COLUMNS,
-  HEADER,
-  MOCK_DATA,
-} from "./tableUserList.constants";
+import { COUNT_ADDITIONAL_COLUMNS, HEADER } from "./tableUserList.constants";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -14,12 +10,17 @@ import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
+import useGetAllUsers from "@presentation/hooks/useCase/useGetAllUsers";
+import EllipseBox from "src/presentation/components/ellipseBox";
 
 export function TableUserList() {
+  const { loading, getAllUsers, users } = useGetAllUsers();
   const [hovered, setHovered] = useState<string | null>(null);
   const { handleSelectUser } = useSelectedUser();
   const { dispatch } = useDialogActions();
-  const loading = false;
+  useEffect(() => {
+    getAllUsers();
+  }, []);
   const handleHoverSelect = (value: string) => {
     if (hovered === value) return;
     setHovered(value);
@@ -28,6 +29,7 @@ export function TableUserList() {
     if (!hovered) return;
     setHovered(null);
   };
+  console.log(users, "users");
   return (
     <Table>
       <Table.Head>
@@ -36,9 +38,6 @@ export function TableUserList() {
           disabled={false}
           numSelected={0}
           rowCount={0}
-          onSelectAllClick={() => {
-            console.log("login");
-          }}
         >
           {HEADER.map(({ title, index }) => (
             <Table.Cell key={index}>{title}</Table.Cell>
@@ -52,12 +51,12 @@ export function TableUserList() {
         />
       ) : (
         <Table.IfIsEmpty
-          isEmpty={false}
+          isEmpty={!users.length}
           colSpan={HEADER.length + COUNT_ADDITIONAL_COLUMNS}
           message="No Data Found"
         >
           <Table.Body>
-            {MOCK_DATA.map((item) => {
+            {users.map((item) => {
               const isHovered = hovered === item.id;
               return (
                 <Table.RowBody
@@ -65,9 +64,6 @@ export function TableUserList() {
                   disabled={false}
                   key={item.id}
                   selected={false}
-                  onClick={() => {
-                    console.log("Hello");
-                  }}
                   onMouseEnter={() => handleHoverSelect(item.id)}
                   onMouseLeave={() => handleHoverUnSelect()}
                   checkboxProps={{
@@ -119,9 +115,11 @@ export function TableUserList() {
                     </Typography>
                   </Table.Cell>
                   <Table.Cell>
-                    <Typography variant="body1" component="p" noWrap>
-                      Role
-                    </Typography>
+                    <EllipseBox maxWidth={160} tooltipLabel={item.roleId}>
+                      <Typography variant="body1" component="p" noWrap>
+                        {item.roleId}
+                      </Typography>
+                    </EllipseBox>
                   </Table.Cell>
                   <Table.Cell>
                     <Fade in={isHovered}>

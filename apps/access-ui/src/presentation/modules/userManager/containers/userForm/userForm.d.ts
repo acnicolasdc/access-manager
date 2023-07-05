@@ -8,4 +8,5 @@ export type TKeyOfTUser =
   | "phoneNumber"
   | "secondaryPhoneNumber"
   | "homeAddress"
-  | "password";
+  | "password"
+  | "roleId";
