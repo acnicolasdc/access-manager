@@ -7,6 +7,7 @@ import type {
   TRole,
   TGenericErrorResponse,
   TGenericCreatedOrUpdateResponse,
+  TRoleUpdate,
 } from "@access-manager/types";
 
 export default class RoleApiDataSourceImpl implements IRoleDataSource {
@@ -27,7 +28,7 @@ export default class RoleApiDataSourceImpl implements IRoleDataSource {
     };
   }
   async create(
-    params: Omit<TRole, "createdAt" | "updatedAt" | "id">
+    params: Omit<TRole, "createdAt" | "updatedAt" | "id" | "roleType">
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
     const response = await httpClient.post<
       TGenericCreatedOrUpdateResponse | TGenericErrorResponse
@@ -44,7 +45,7 @@ export default class RoleApiDataSourceImpl implements IRoleDataSource {
     };
   }
   async update(
-    params: Omit<TRole, "createdAt" | "updatedAt">
+    params: TRoleUpdate
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
     const response = await httpClient.patch<
       TGenericCreatedOrUpdateResponse | TGenericErrorResponse

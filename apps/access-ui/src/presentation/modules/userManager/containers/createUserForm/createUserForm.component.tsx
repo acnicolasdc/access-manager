@@ -10,7 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
-import type { TUser } from "@access-manager/types";
+import type { TUser, TUserCreate } from "@access-manager/types";
 import { UserFormSelect } from "@presentation/modules/userManager/components/userFormSelect.component";
 import useCreateUser from "@presentation/hooks/useCase/useCreateUser";
 import Alert from "@mui/material/Alert";
@@ -42,7 +42,7 @@ export function CreateUserForm({ open, onClose }: ICreateUserFormProps) {
     setDisplay(false);
   };
 
-  const onSubmit = (data: Omit<TUser, "createdAt" | "updatedAt">) =>
+  const onSubmit = (data: TUserCreate) =>
     createUser(data).then(() => {
       getAllUsers().then(() => {
         onClose();

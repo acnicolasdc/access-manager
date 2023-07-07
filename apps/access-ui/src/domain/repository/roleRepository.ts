@@ -1,12 +1,12 @@
 import type { TApplicationResponse } from "@core/types/http";
-import type { TGenericCreatedOrUpdateResponse, TRole } from "@access-manager/types";
+import type { TGenericCreatedOrUpdateResponse, TRole, TRoleCreate, TRoleUpdate } from "@access-manager/types";
 
 export interface IRoleRepository {
   getAll(): Promise<TApplicationResponse<TRole[]>>;
   update(
-    params: Omit<TRole, "createdAt" | "updatedAt">
+    params: TRoleUpdate
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
   create(
-    params: Omit<TRole, "createdAt" | "updatedAt">
+    params: TRoleCreate
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }

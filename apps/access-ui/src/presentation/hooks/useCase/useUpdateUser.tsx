@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type {
   TGenericCreatedOrUpdateResponse,
-  TUser,
+  TUserUpdate,
 } from "@access-manager/types";
 import UserApiDataSourceImpl from "@data/dataSource/api/userApiDataSource";
 import { UserRepositoryImpl } from "@data/repository/userRepositoryImpl";
@@ -17,7 +17,7 @@ export default function useUpdateUser() {
     new UserRepositoryImpl(new UserApiDataSourceImpl())
   );
 
-  async function updateUser(params: Omit<TUser, "createdAt" | "updatedAt">) {
+  async function updateUser(params: TUserUpdate) {
     setLoading(true);
     const response = await updateUserUseCase.invoke(params);
     setLoading(false);

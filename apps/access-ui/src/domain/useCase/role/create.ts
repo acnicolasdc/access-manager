@@ -3,11 +3,12 @@ import type { IRoleRepository } from "@domain/repository/roleRepository";
 import type {
   TGenericCreatedOrUpdateResponse,
   TRole,
+  TRoleUpdate,
 } from "@access-manager/types";
 
 export interface ICreateUseCase {
   invoke: (
-    params: Omit<TRole, "createdAt" | "updatedAt">
+    params: TRoleUpdate
   ) => Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }
 export class Create implements ICreateUseCase {
@@ -15,7 +16,7 @@ export class Create implements ICreateUseCase {
   constructor(_createRepo: IRoleRepository) {
     this.createRepo = _createRepo;
   }
-  async invoke(params: Omit<TRole, "createdAt" | "updatedAt">) {
+  async invoke(params: Omit<TRole, "createdAt" | "updatedAt" | "roleType" | "id" >) {
     return this.createRepo.create(params);
   }
 }

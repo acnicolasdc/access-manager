@@ -15,7 +15,7 @@ import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
-import type { TUser } from "@access-manager/types";
+import type { TUserUpdate } from "@access-manager/types";
 import { UserFormSelect } from "@presentation/modules/userManager/components/userFormSelect.component";
 import useUpdateUser from "@presentation/hooks/useCase/useUpdateUser";
 import Alert from "@mui/material/Alert";
@@ -59,7 +59,7 @@ export function UpdateUserForm() {
     }, 300);
   };
 
-  const onSubmit = (data: Omit<TUser, "createdAt" | "updatedAt">) =>
+  const onSubmit = (data: TUserUpdate) =>
     updateUser(data).then(() => {
       getAllUsers().then(() => {
         handleCloseModal();

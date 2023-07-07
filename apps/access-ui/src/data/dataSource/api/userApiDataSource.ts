@@ -7,6 +7,8 @@ import type {
   TUser,
   TGenericErrorResponse,
   TGenericCreatedOrUpdateResponse,
+  TUserCreate,
+  TUserUpdate,
 } from "@access-manager/types";
 
 export default class UserApiDataSourceImpl implements IUserDataSource {
@@ -26,7 +28,7 @@ export default class UserApiDataSourceImpl implements IUserDataSource {
     };
   }
   async update(
-    params: Omit<TUser, "createdAt" | "updatedAt">
+    params: TUserUpdate
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>> {
     const response = await httpClient.patch<
       TGenericCreatedOrUpdateResponse | TGenericErrorResponse
@@ -42,7 +44,7 @@ export default class UserApiDataSourceImpl implements IUserDataSource {
       message,
     };
   }
-  async create(params: Omit<TUser, "createdAt" | "updatedAt" | 'id'>): Promise<
+  async create(params: TUserCreate): Promise<
     TApplicationResponse<TGenericCreatedOrUpdateResponse | null>
   > {
     const response = await httpClient.post<

@@ -1,12 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import { Control, Controller } from "react-hook-form";
 import TextField from "@presentation/components/textFiled";
-import type { TRole } from "@access-manager/types";
-import type { TKeyOfTRole } from "../core/roleForm";
 
 export interface IRoleFormInputProps {
-  name: TKeyOfTRole;
-  control: Control<Omit<TRole, "createdAt" | "updatedAt">> | undefined;
+  name: string;
+  control?: Control<any>;
   label: string;
   setValue?: Dispatch<SetStateAction<string | null>>;
 }

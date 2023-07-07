@@ -93,16 +93,16 @@ export function TableRoleList({ header }: TableUserListProps) {
                       </Typography>
                     </Table.Cell>
                     <Table.Cell>
-                      <EllipseBox maxWidth={160} tooltipLabel={item.roleTypeId}>
+                      <EllipseBox maxWidth={160} tooltipLabel={item.roleType.description}>
                         <Typography variant="body1" component="p" noWrap>
-                          {item.roleTypeId}
+                          {item.roleType.name}
                         </Typography>
                       </EllipseBox>
                     </Table.Cell>
                     <Table.Cell>
-                      <Typography variant="body1" component="p" noWrap>
-                        {item.roleTypeId}
-                      </Typography>
+                        <Typography variant="body1" component="p" noWrap>
+                          {item.roleType.description}
+                        </Typography>
                     </Table.Cell>
                     <Table.Cell>
                       <Fade in={isHovered}>

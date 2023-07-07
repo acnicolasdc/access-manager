@@ -72,7 +72,7 @@ export function TableUserList({ header }: TableUserListProps) {
                     disabled={false}
                     key={item.id}
                     selected={false}
-                    onMouseEnter={() => handleHoverSelect(item.id || '')}
+                    onMouseEnter={() => handleHoverSelect(item.id || "")}
                     onMouseLeave={() => handleHoverUnSelect()}
                     checkboxProps={{
                       checked: false,
@@ -98,14 +98,21 @@ export function TableUserList({ header }: TableUserListProps) {
                       </Typography>
                     </Table.Cell>
                     <Table.Cell>
-                      <Typography variant="body1" component="p" noWrap>
-                        {item.email}
-                      </Typography>
+                      <EllipseBox maxWidth={130} tooltipLabel={item.email}>
+                        <Typography variant="body1" component="p" noWrap>
+                          {item.email}
+                        </Typography>
+                      </EllipseBox>
                     </Table.Cell>
                     <Table.Cell>
-                      <Typography variant="body1" component="p" noWrap>
-                        {item.secondaryEmail}
-                      </Typography>
+                      <EllipseBox
+                        maxWidth={130}
+                        tooltipLabel={item.secondaryEmail}
+                      >
+                        <Typography variant="body1" component="p" noWrap>
+                          {item.secondaryEmail}
+                        </Typography>
+                      </EllipseBox>
                     </Table.Cell>
                     <Table.Cell>
                       <Typography variant="body1" component="p" noWrap>
@@ -123,9 +130,12 @@ export function TableUserList({ header }: TableUserListProps) {
                       </Typography>
                     </Table.Cell>
                     <Table.Cell>
-                      <EllipseBox maxWidth={160} tooltipLabel={item.roleId}>
+                      <EllipseBox
+                        maxWidth={160}
+                        tooltipLabel={item.role.description}
+                      >
                         <Typography variant="body1" component="p" noWrap>
-                          {item.roleId}
+                          {item.role.name}
                         </Typography>
                       </EllipseBox>
                     </Table.Cell>

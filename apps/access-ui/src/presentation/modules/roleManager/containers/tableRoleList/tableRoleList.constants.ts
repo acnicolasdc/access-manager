@@ -1,4 +1,3 @@
-import { TRole } from "@access-manager/types";
 import type { TTableUserListHeader } from "./tableRoleList";
 
 export const HEADER: readonly TTableUserListHeader[] = [
@@ -11,16 +10,3 @@ export const HEADER: readonly TTableUserListHeader[] = [
 
 export const COUNT_ADDITIONAL_COLUMNS = 1;
 
-export const MOCK_DATA: TRole[] = [
-  {
-    id: "",
-    name: "nicolas@gmail.com",
-    description: "Nicolas",
-    roleTypeId: '',
-    roleType: {
-      id: "",
-      name: "",
-      description: "",
-    },
-  },
-];

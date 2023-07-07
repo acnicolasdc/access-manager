@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type {
   TGenericCreatedOrUpdateResponse,
-  TRole,
+  TRoleCreate,
 } from "@access-manager/types";
 import RoleApiDataSourceImpl from "@data/dataSource/api/roleApiDataSource";
 import { RoleRepositoryImpl } from "@data/repository/roleRepositoryImpl";
@@ -17,7 +17,7 @@ export default function useCreateRole() {
     new RoleRepositoryImpl(new RoleApiDataSourceImpl())
   );
 
-  async function createRole(params: Omit<TRole, "createdAt" | "updatedAt">) {
+  async function createRole(params: TRoleCreate) {
     setLoading(true);
     const response = await createRoleUseCase.invoke(params);
     setLoading(false);

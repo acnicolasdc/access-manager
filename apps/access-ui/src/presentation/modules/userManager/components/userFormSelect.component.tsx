@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Control, Controller } from "react-hook-form";
-import type { TUser } from "@access-manager/types";
-import type { TKeyOfTUser } from "../core/updateUserForm";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import theme from "@core/configuration/theme";
@@ -9,8 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import useGetAllRoles from "src/presentation/hooks/useCase/useGetAllRoles";
 
 export interface IUserFormSelectProps {
-  name: TKeyOfTUser;
-  control: Control<Omit<TUser, "createdAt" | "updatedAt">> | undefined;
+  name: string;
+  control?: Control<any>;
   label: string;
   setValue?: Dispatch<SetStateAction<string | null>>;
 }

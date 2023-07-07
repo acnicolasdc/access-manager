@@ -1,12 +1,10 @@
 import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { Control, Controller } from "react-hook-form";
 import TextField from "@presentation/components/textFiled";
-import type { TUser } from "@access-manager/types";
-import type { TKeyOfTUser } from "../core/updateUserForm";
 
 export interface IUserFormInputProps {
-  name: TKeyOfTUser;
-  control: Control<Omit<TUser, "createdAt" | "updatedAt">> | undefined;
+  name: string;
+  control?: Control<any>;
   label: string;
   setValue?: Dispatch<SetStateAction<string | null>>;
   disabled?: boolean;

@@ -10,7 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
-import type { TRole } from "@access-manager/types";
+import type { TRoleCreate } from "@access-manager/types";
 import { RoleFormSelect } from "../../components/roleFormSelect.component";
 import LoadingButton from "@presentation/components/loadingButton";
 import useCreateRole from "@presentation/hooks/useCase/useCreateRole";
@@ -42,7 +42,7 @@ export function CreateRoleForm({ open, onClose }: ICreateRoleFormProps) {
     setDisplay(false);
   };
 
-  const onSubmit = (data: Omit<TRole, "createdAt" | "updatedAt">) =>
+  const onSubmit = (data: TRoleCreate) =>
     createRole(data).then(() => {
       getAllRoles().then(() => {
         onClose();

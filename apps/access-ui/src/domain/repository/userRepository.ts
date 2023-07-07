@@ -2,14 +2,16 @@ import type { TApplicationResponse } from "@core/types/http";
 import type {
   TUser,
   TGenericCreatedOrUpdateResponse,
+  TUserCreate,
+  TUserUpdate
 } from "@access-manager/types";
 
 export interface IUserRepository {
   getAll(): Promise<TApplicationResponse<TUser[]>>;
   update(
-    params: Omit<TUser, "createdAt" | "updatedAt">
+    params: TUserUpdate
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
   create(
-    params: Omit<TUser, "createdAt" | "updatedAt">
+    params: TUserCreate
   ): Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }

@@ -2,12 +2,12 @@ import type { TApplicationResponse } from "@core/types/http";
 import type { IRoleRepository } from "@domain/repository/roleRepository";
 import type {
   TGenericCreatedOrUpdateResponse,
-  TRole,
+  TRoleUpdate,
 } from "@access-manager/types";
 
 export interface IUpdateUseCase {
   invoke: (
-    params: Omit<TRole, "createdAt" | "updatedAt">
+    params: TRoleUpdate
   ) => Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }
 export class Update implements IUpdateUseCase {
@@ -15,7 +15,7 @@ export class Update implements IUpdateUseCase {
   constructor(_updateRepo: IRoleRepository) {
     this.updateRepo = _updateRepo;
   }
-  async invoke(params: Omit<TRole, "createdAt" | "updatedAt">) {
+  async invoke(params: TRoleUpdate) {
     return this.updateRepo.update(params);
   }
 }

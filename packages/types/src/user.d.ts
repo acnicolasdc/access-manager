@@ -1,5 +1,7 @@
+import { TRole } from './role';
+
 export type TUser = {
-  id: string | null;
+  id: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -12,4 +14,8 @@ export type TUser = {
   createdAt: string;
   updatedAt: string;
   roleId: string;
+  role: TRole
 };
+
+export type TUserCreate = Omit<TUser, "createdAt" | "updatedAt" | "role" | "id">
+export type TUserUpdate = Omit<TUser, "createdAt" | "updatedAt" | "role">

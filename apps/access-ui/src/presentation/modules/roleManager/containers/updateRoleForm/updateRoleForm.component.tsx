@@ -15,7 +15,7 @@ import {
   useDialogActions,
   EDialogActionsActionKind,
 } from "@presentation/providers/providerDialogActions";
-import type { TRole } from "@access-manager/types";
+import type { TRole, TRoleUpdate } from "@access-manager/types";
 import { RoleFormSelect } from "../../components/roleFormSelect.component";
 import LoadingButton from "@presentation/components/loadingButton";
 import useUpdateRole from "@presentation/hooks/useCase/useUpdateRole";
@@ -56,7 +56,7 @@ export function UpdateRoleForm() {
     if (role) reset(role);
   }, [role]);
 
-  const onSubmit = (data: Omit<TRole, "createdAt" | "updatedAt">) =>
+  const onSubmit = (data: TRoleUpdate) =>
     updateRole(data).then(() => {
       getAllRoles().then(() => {
         handleCloseModal();

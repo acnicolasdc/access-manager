@@ -2,12 +2,12 @@ import type { TApplicationResponse } from "@core/types/http";
 import type { IUserRepository } from "@domain/repository/userRepository";
 import type {
   TGenericCreatedOrUpdateResponse,
-  TUser,
+  TUserCreate,
 } from "@access-manager/types";
 
 export interface ICreateUseCase {
   invoke: (
-    params: Omit<TUser, "createdAt" | "updatedAt">
+    params: TUserCreate
   ) => Promise<TApplicationResponse<TGenericCreatedOrUpdateResponse | null>>;
 }
 export class Create implements ICreateUseCase {
@@ -15,7 +15,7 @@ export class Create implements ICreateUseCase {
   constructor(_createRepo: IUserRepository) {
     this.createRepo = _createRepo;
   }
-  async invoke(params: Omit<TUser, "createdAt" | "updatedAt">) {
+  async invoke(params: TUserCreate) {
     return this.createRepo.create(params);
   }
 }

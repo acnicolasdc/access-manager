@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User as UserModel } from '../models/user.model';
 import { UserDTO } from '../dtos/user.dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
+import { Role } from 'src/roles/models/role.model';
 
 @Injectable()
 export class UserDao {
@@ -12,7 +13,13 @@ export class UserDao {
   ) {}
 
   findAll(): Promise<UserDTO[]> {
-    return this.userModel.findAll();
+    return this.userModel.findAll({
+      include: [
+        {
+          model: Role,
+        },
+      ],
+    });
   }
 
   findOne(id: string): Promise<UserDTO> {
