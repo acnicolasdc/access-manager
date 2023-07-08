@@ -1,13 +1,17 @@
 version: "2"
 
 services:
-  postgres:
-    image: postgres:14-alpine
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: webapp_dev
-      POSTGRES_HOST_AUTH_METHOD: trust
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root1202
     # networks:
     #   - form_hub_network
   access-services:
@@ -15,17 +19,21 @@ services:
       context: .
       dockerfile: ./apps/access-services/Dockerfile
     depends_on:
-      - postgres
+      - mysql
     ports:
       - 8000:8000
+      - 3306:3306
       - 9229:9229 # debugger port
     volumes:
       - ./apps/access-services:/app/apps/access-services
       - /app/apps/access-services/node_modules
     command: npm start:docker
     environment:
-      DATABASE_URL: postgres://postgres@postgres/webapp_dev
-      PORT: 8000
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root1202
+      DATABASE_NAME: test
     # networks:
     #   - form_hub_network
 # Define a network, which allows containers to communicate
