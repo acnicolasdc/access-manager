@@ -30,7 +30,8 @@ unfortunately docker compose is having a problem with the alpine version and tur
     * create user
 
 # Backend ENV
-APP_ENV=development
+
+`APP_ENV=development
 APP_NAME="Test"
 APP_URL=http://localhost:3000
 APP_PORT=3000
@@ -38,8 +39,8 @@ DATABASE_HOST=localhost
 DATABASE_PORT=3306
 DATABASE_USER=root
 DATABASE_PASSWORD=root1202
-DATABASE_NAME=test
+DATABASE_NAME=test`
 
 # Frontend ENV
 
-VITE_API_BASE=/api
+`VITE_API_BASE=/api`
